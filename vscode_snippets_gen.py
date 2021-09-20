@@ -1,7 +1,9 @@
 blanks_per_tab = 6
+cnt = 1
+count_flag = False
+
 with open('des.txt', 'w+') as f_des:
     f_des.write('"name": {\n\t"prefix": "prefix",\n\t"body": [\n')
-    cnt = 1
     with open('src.txt') as f_src:
         lines = f_src.readlines()
         for line in lines:
@@ -12,7 +14,7 @@ with open('des.txt', 'w+') as f_des:
                 elif line[i] == "\n": #末尾的回车键不管
                     continue
                 elif line[i] == "}":
-                    if i > 0 and line[i-1] == '{':
+                    if i > 0 and line[i-1] == '{' and count_flag:
                         s += "$"+str(cnt)
                         cnt += 1;
                     s += "}"
